@@ -1,4 +1,3 @@
-// 초보자를 위한 바닐라 자바스크립트 #3-2
 const clockContainer = document.querySelector(".js-clock"),
     clockTitle = clockContainer.querySelector("h1");
 
