@@ -4,7 +4,24 @@ toDoList = document.querySelector(".js-toDoList");
 
 const TODOS_LS = 'toDos';
 
-const toDos = [];
+let toDos = [];
+
+function deleteToDo(event) {
+    // event.target.parentNode -> 클릭한 요소의 부모 요소를 보여줌
+    const btn = event.target;
+    const li = btn.parentNode;
+
+    // filter -> array 안에 담겨있는 각각의 값에 함수를 적용, return 값이 true인 값만 array로 반환
+    // 사용자가 클릭한 li 값을 제외한 array가 반환됨
+    const cleanToDos = toDos.filter(function(toDo) {
+        return toDo.id !== parseInt(li.id);
+    });
+
+    // removeChild -> 해당 요소를 삭제함
+    toDoList.removeChild(li);
+    toDos = cleanToDos;
+    saveToDos();
+}
 
 function saveToDos() {
     // local storage에는 자바스크립트의 data를 저장할 수 없음. 오직 string
@@ -26,6 +43,7 @@ function paintToDo(text) {
     };
 
     delBtn.innerHTML = "🗑️";
+    delBtn.addEventListener("click", deleteToDo);
     span.innerHTML = text;
 
     toDos.push(toDoObj);
