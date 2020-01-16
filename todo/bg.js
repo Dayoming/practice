@@ -9,7 +9,7 @@ const IMG_NUMBER = 4;
 function paintImage(imgNumber) {
     // image 안에 새로운 object를 만듬
     const image = new Image();
-    image.src = `/images/${imgNumber}.jpg`;
+    image.src = `/todo/images/${imgNumber}.jpg`;
     // image element class 안에 bgImage 추가
     image.classList.add("bgImage");
     body.appendChild(image);
