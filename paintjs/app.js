@@ -1,11 +1,14 @@
 // canvas에는 width와 height를 지정해줘야함
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext("2d");
+const colors = document.getElementsByClassName("jsColor");
 
 canvas.width = 700;
 canvas.height = 700;
 
+// 우리가 그릴 선들이 모두 이 색을 갖는다
 ctx.strokeStyle = "#2c2c2c";
+// line의 너비
 ctx.lineWidth = 2.5;
 
 let painting = false;
@@ -28,17 +31,20 @@ function onMouseMove(event) {
         ctx.beginPath();
         ctx.moveTo(x, y);
     } else {
+        // 현재의 sub-path에서 마지막 지점(path의 이전 지점)을 특정 좌표로 연결
         ctx.lineTo(x, y); 
         ctx.stroke();
     }
 }
 
-function onMouseDown(event) {
-    painting = true;
-}
-
 function onMouseUp(event) {
     stopPainting();
+}
+
+function handleColorClick(event) {
+    const color = event.target.style.backgroundColor;
+    // strokeStyle을 override하고 context의 색상을 클릭한 색상으로 바꿈
+    ctx.strokeStyle = color;
 }
 
 if(canvas) {
@@ -52,8 +58,6 @@ if(canvas) {
     canvas.addEventListener("mouseleave", stopPainting);
 }
 
-function init() {
-
-}
-
-init();
+// Array.from 메소드는 object로부터 array를 만든다.
+Array.from(colors).forEach(color => 
+    color.addEventListener("click", handleColorClick));
