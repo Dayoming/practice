@@ -2,6 +2,7 @@
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext("2d");
 const colors = document.getElementsByClassName("jsColor");
+const range = document.getElementById("jsRange");
 
 canvas.width = 700;
 canvas.height = 700;
@@ -47,6 +48,11 @@ function handleColorClick(event) {
     ctx.strokeStyle = color;
 }
 
+function handleRangeChange(event) {
+    const size = event.target.value;
+    ctx.lineWidth = size;
+}
+
 if(canvas) {
     // 캔버스 위에서 마우스가 움직일 때
     canvas.addEventListener("mousemove", onMouseMove);
@@ -61,3 +67,8 @@ if(canvas) {
 // Array.from 메소드는 object로부터 array를 만든다.
 Array.from(colors).forEach(color => 
     color.addEventListener("click", handleColorClick));
+
+if(range) {
+    // range는 input에 반응함
+    range.addEventListener("input", handleRangeChange);
+}
